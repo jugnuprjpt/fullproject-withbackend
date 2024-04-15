@@ -1,9 +1,12 @@
+import ApiTesting from './ApiTesting';
 import './App.css';
 
 function App() {
+
   return (
     <div className="App">
-       abc
+    
+      <ApiTesting/>
     </div>
   );
 }
