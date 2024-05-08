@@ -33,9 +33,7 @@ function RandomUsers() {
       const randomUser = await fetch(
         `${API_URL}/api/v1/public/randomusers/${id}`
       );
-
       const responseData = await randomUser.json();
-
       const listingData = responseData.data;
       setRandomList(listingData);
     } catch (error) {

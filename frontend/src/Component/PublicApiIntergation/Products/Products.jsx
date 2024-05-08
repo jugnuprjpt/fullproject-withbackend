@@ -6,7 +6,7 @@ function Products() {
   const [list, setList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(2);
-  const [showData, setShowData] = useState(10);
+  const [showData, setShowData] = useState(4);
 
   const [getSingleProduct, setGetSingleProduct] = useState([]);
  
@@ -37,6 +37,7 @@ function Products() {
     const getProduct = getData.data.data;
     setTotalPage(response?.data?.totalPages);
     setList(getProduct);
+    specficProduct(getProduct[0].id)
   };
 
   const handlePageChange = (newPage) => {
@@ -144,7 +145,7 @@ function Products() {
         ))}
       </div>
 
-      {totalPage > 1 && (
+      {/* {totalPage < 0 && ( */}
         <div className="mt-4">
           <button
             onClick={() => handlePageChange(currentPage - 1)}
@@ -175,7 +176,7 @@ function Products() {
             Next
           </button>{" "}
         </div>
-      )}
+   {/* )}  */}
 
       <>
       <h1 className="text-xl font-bold mb-4 text-center p-4">
