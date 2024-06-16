@@ -47,83 +47,91 @@ function RandomUsers() {
 
   return (
     <>
-      <div className="flex flex-col md:flex-row items-center justify-center">
-        <h1 className="text-xl font-bold mb-4 text-center p-4">
-          Random User List
-        </h1>
-        <div className="flex items-center">
+    
+    <div className="flex flex-col items-center justify-center md:justify-between w-full">
+        <h1 className="text-xl font-bold mb-4 p-4">Here You can see Random User List</h1>
+       
+        <table className="w-full md:w-1/2 border-collapse border border-gray-300">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="px-4 py-2 border border-gray-300">Name</th>
+              <th className="px-4 py-2 border border-gray-300">Gender</th>
+              <th className="px-4 py-2 border border-gray-300">Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            {list.map((item, index) => (
+              <tr
+                key={index}
+                onClick={() => randomIdUserList(item.id)}
+                className="cursor-pointer hover:bg-gray-200"
+              >
+                <td className="px-4 py-2 border border-gray-300">
+                  {item.name.first}
+                </td>
+                <td className="px-4 py-2 border border-gray-300">
+                  {item.gender}
+                </td>
+                <td className="px-4 py-2 border border-gray-300">
+                  {item.email}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        
+      </div>
+
+      <div className="flex items-center mb-4 w-full md:w-auto px-[500px] mt-2.5">
           <input
             type="text"
             value={showData}
             onChange={(e) => setShowData(e.target.value)}
-            className="border border-gray-300 rounded-md px-3 py-2 mb-4 mr-2"
+            className="border border-gray-300 rounded-md px-3 py-2 w-[100px]"
           />
+          <span className="p-2.5">Number of users per page</span>
         </div>
-      </div>
-
-      <table className="w-3/4 border-collapse border border-gray-300">
-        <thead>
-          <tr className="bg-gray-100">
-            <th className="px-4 py-2 border border-gray-300">Name</th>
-            <th className="px-4 py-2 border border-gray-300">Gender</th>
-            <th className="px-4 py-2 border border-gray-300">Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          {list.map((item, index) => (
-            <tr
-              key={index}
-              onClick={() => randomIdUserList(item.id)}
-              className="cursor-pointer hover:bg-gray-200"
-            >
-              <td className="px-4 py-2 border border-gray-300">
-                {item.name.first}
-              </td>
-              <td className="px-4 py-2 border border-gray-300">
-                {item.gender}
-              </td>
-              <td className="px-4 py-2 border border-gray-300">{item.email}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
       {totalPage > 1 && (
-        <div className="mt-4">
+        <div className="flex flex-wrap items-center justify-center ml-[630px] -mt-[44px]">
           <button
             onClick={() => handlePageChange(currentPage - 1)}
             type="button"
-            class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800"
+            className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800"
+            disabled={currentPage === 1}
           >
             Prev
           </button>
           <span className="mr-4"></span>
-          {Array.from(Array(totalPage).keys()).map((num, index) => (
-            <button
-              key={index}
-              className={`cursor-pointer mb-4 ${
-                currentPage === num + 1
-                  ? "bg-blue-500 text-white"
-                  : "bg-yellow-500 text-red-500"
-              } px-4 py-2 mr-4`}
-              onClick={() => handlePageChange(num + 1)}
-            >
-              {num + 1}
-            </button>
-          ))}
+          {Array.from(Array(totalPage).keys())
+            .slice(currentPage - 1, currentPage + 2)
+            .map((num, index) => (
+              <button
+                key={index}
+                className={`cursor-pointer mb-4 ${
+                  currentPage === num + 1
+                    ? "bg-blue-500 text-white"
+                    : "bg-yellow-500 text-red-500"
+                } px-4 py-2 mr-4 rounded-lg text-sm`}
+                onClick={() => handlePageChange(num + 1)}
+              >
+                {num + 1}
+              </button>
+            ))}
           <button
-            class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800"
-            disabled={currentPage === totalPage ? true : false}
+            className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800"
+            disabled={currentPage === totalPage}
             onClick={() => handlePageChange(currentPage + 1)}
           >
             Next
-          </button>{" "}
+          </button>
         </div>
       )}
 
+
+
       <>
         <h1 className="text-xl font-bold mb-4 text-center p-4">
-          Particular User{" "}
+          You can select User from table see the User Deatils{" "}
         </h1>
 
         <div className="flex justify-center items-center">
